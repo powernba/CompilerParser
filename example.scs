@@ -1,0 +1,3 @@
+﻿{A = scanf();}
+{B = A*2;}
+printf(B);
