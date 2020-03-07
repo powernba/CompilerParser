@@ -1,3 +1,4 @@
-﻿{A = scanf();}
-{B = A*2;}
-printf(B);
+﻿{
+    int number1;
+    int number2;
+}
