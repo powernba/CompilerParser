@@ -165,9 +165,7 @@ namespace MTProject
             MethodSymbol methodToken = symbolTable.AddMethod(name, type, formalParams.ToArray(), null);
             methodToken.methodInfo = emit.AddMethod(name.value, type, formalParamTypes.ToArray());
             symbolTable.BeginScope();
-
             while (IsStatement()) ;
-
             //Console.WriteLine("");
 
             return diag.GetErrorCount() == 0;
@@ -195,34 +193,34 @@ namespace MTProject
                 ReadNextToken();
                 return true;
             }
-            else if (IsIfSt())
-            {
-                ReadNextToken();
-                return true;
-            }
-            else if (IsWhileSt())
-            {
-                ReadNextToken();
-                return true;
-            }
-            else if (IsStopSt())
-            {
-                ReadNextToken();
-                return true;
-            }
-            else if (IsExpression(out type))
-            {
-                ReadNextToken();
-                return true;
-            }
+            //else if (IsIfSt())
+            //{
+            //    ReadNextToken();
+            //    return true;
+            //}
+            //else if (IsWhileSt())
+            //{
+            //    ReadNextToken();
+            //    return true;
+            //}
+            //else if (IsStopSt())
+            //{
+            //    ReadNextToken();
+            //    return true;
+            //}
+            //else if (IsExpression(out type))
+            //{
+            //    ReadNextToken();
+            //    return true;
+            //}
 
             if (CheckSpecialSymbol(";"))
             {
                 ReadNextToken();
                 return true;
             }
-
             return false;
+
         }
 
         //[3]  CompoundSt = '{' {Declaration} {Statement} '}'
@@ -238,17 +236,14 @@ namespace MTProject
             }
             if (!CheckSpecialSymbol("}")) Error("Очаквам специален символ '}'");
 
-            return true;
+            return false;
         }
 
         //[4]  Declaration = VarDef | FuncDef.
         public bool IsDeclaration()
         {
             Warning("Влиза IsDeclaration");
-
-            IsFuncDefOrVarDef();
-
-            return true;
+            return IsFuncDefOrVarDef();
         }
 
         //[5]  VarDef = TypeIdent Ident. + [6]  FuncDef = TypeIdent Ident '(' TypeIdent Ident ')' CompoundSt.
@@ -284,8 +279,6 @@ namespace MTProject
 
 
             //if (!CheckSpecialSymbol(";")) Error("Очаквам специален символ ';'");
-
-
             if (CheckSpecialSymbol("("))
             {
                 //if (!CheckSpecialSymbol(";")) Error("Очаквам специален символ ';'");
